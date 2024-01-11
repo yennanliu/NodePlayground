@@ -10,7 +10,7 @@
     "multer": "^1.4.5-lts.1"
   },
   "scripts": {
-    "start": "nodemon src/app2.ts",
+    "start": "nodemon src/app3.ts",
     "build": "tsc --project ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
