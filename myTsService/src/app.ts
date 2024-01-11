@@ -36,12 +36,12 @@ app.get('/index.html', function (req, res) {
     //res.sendFile(  __dirname + '..' + "static/index.html" );
 })
 
-app.get('/process_get', function (req, res) {
+app.post('/process_post', urlencodedParser, function (req, res) {
 
     // 输出 JSON 格式
     var response = {
-        "first_name":req.query.first_name,
-        "last_name":req.query.last_name
+        "first_name":req.body.first_name,
+        "last_name":req.body.last_name
     };
     console.log(response);
     res.end(JSON.stringify(response));
