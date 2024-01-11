@@ -132,3 +132,5 @@ dist
 
 # intelliJ web storm
 myTsService/.idea/
+
+myTsService/src/*.js
