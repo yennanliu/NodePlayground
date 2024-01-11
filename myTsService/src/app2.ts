@@ -6,6 +6,9 @@ var fs = require("fs");
 var bodyParser = require('body-parser');
 var multer  = require('multer');
 
+var cookieParser = require('cookie-parser')
+var util = require('util');
+
 const app = express();
 const port = 3000;
 
@@ -19,6 +22,7 @@ app.use(multer({ dest: '/tmp/'}).array('image'));
 
 // router
 app.get('/', (req:any, res:any) => {
+    console.log("Cookies: " + util.inspect(req.cookies));
     res.send('---> My server is working !!!!!');
 });
 
@@ -28,11 +32,14 @@ app.get('/upload_file.html', function (req:any, res:any) {
 
 app.post('/file_upload', function (req:any, res:any){
 
-    console.log("req.files[0] = " + req.files[0]);
+    console.log(">>> file info = " + JSON.stringify(req.files[0]));
     var des_file = __dirname + "/" + req.files[0].originalname;
+    console.log("read file ...")
     fs.readFile( req.files[0].path, function (err:any, data:any) {
+        console.log("save file ...")
         fs.writeFile(des_file, data, function (err: any) {
             if( err ){
+                console.log("save file FAIL ...")
                 console.log( err );
             }else{
                 let response = {
@@ -40,8 +47,10 @@ app.post('/file_upload', function (req:any, res:any){
                     filename:req.files[0].originalname
                 };
             }
-            console.log( response );
-            res.end( JSON.stringify( response ) );
+            console.log( "response = " + JSON.stringify(response) );
+            console.log("save file OK ...")
+            //res.end( JSON.stringify( response ) );
+            res.end( JSON.stringify( "OK" ) );
         });
     });
 })

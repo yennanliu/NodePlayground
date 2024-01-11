@@ -8,6 +8,7 @@
 npm run start
 
 # or 
-
-node src/app2.ts
+#node src/app2.ts
 ```
+
+## Ref
